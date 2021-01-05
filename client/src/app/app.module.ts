@@ -25,6 +25,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+// Ng2-charts
+import { ChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
