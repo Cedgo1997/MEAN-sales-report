@@ -5,5 +5,5 @@ export class Sales {
   itemPrice: number;
   itemQty: number;
   totalPrice: number;
-  udated: Date;
+  updated: Date;
 }
