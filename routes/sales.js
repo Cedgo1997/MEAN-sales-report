@@ -77,4 +77,5 @@ router.delete('/:id', (req, res, next) =>
 	})
 );
 
+module.exports = router;
 server.listen(4000);
