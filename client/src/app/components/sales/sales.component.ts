@@ -49,13 +49,13 @@ export class SalesComponent implements OnInit {
   ngOnInit(): void {
     // Initializing Data
     this.getSales();
-    this.getChartData();
+    /* this.getChartData(); */
 
     this.socket.on(
       'update-data',
       function (data: any) {
         this.getSales();
-        this.getChartData();
+        /* this.getChartData(); */
       }.bind(this)
     );
   }
@@ -68,6 +68,22 @@ export class SalesComponent implements OnInit {
         this.data = res;
         console.log(this.data);
         this.isLoadingResults = false;
+        this.pieChartLabels = [];
+        this.pieChartData = [];
+        this.pieChartColors = [];
+        const backgrounds = [];
+        this.data.forEach((ch, idx) => {
+          this.pieChartLabels.push(ch.itemName);
+          this.pieChartData.push(ch.totalPrice);
+          backgrounds.push(
+            `rgba(${0 + idx * 10}, ${255 - idx * 20}, ${0 + idx * 10}, 0.3)`
+          );
+        });
+        this.pieChartColors = [
+          {
+            backgroundColor: backgrounds,
+          },
+        ];
       },
       (err) => {
         console.log(err);
@@ -76,7 +92,7 @@ export class SalesComponent implements OnInit {
     );
   }
 
-  getChartData() {
+  /* getChartData() {
     this.api.getChart().subscribe(
       (res: any) => {
         console.log(res);
@@ -102,5 +118,5 @@ export class SalesComponent implements OnInit {
         console.log(err);
       }
     );
-  }
+  } */
 }
