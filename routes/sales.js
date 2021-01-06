@@ -11,7 +11,7 @@ io.on('connection', (socket) =>
 );
 
 // list data
-router.get('/', (req, res, next) =>
+router.get('/', (req, res) =>
 	Sales.find((err, sales) => {
 		if (err) return next(err);
 		res.json(sales);

@@ -72,9 +72,10 @@ export class SalesApiService {
   }
 
   getChart(): Observable<Chart> {
-    return this.http.get<Chart>(`${apiUrl}/itemsales`).pipe(
-      tap(() => console.log('fetched chart data')),
-      catchError(this.handleError<Chart>('getChart data'))
+    const url = `${apiUrl}/itemsales`;
+    return this.http.get<Chart>(url).pipe(
+      tap((_) => console.log(`fetched chart data`)),
+      catchError(this.handleError<Chart>(`getChart data`))
     );
   }
 }
