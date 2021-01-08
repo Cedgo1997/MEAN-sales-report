@@ -75,6 +75,7 @@ export class SalesComponent implements OnInit {
         this.data.forEach((ch, idx) => {
           this.pieChartLabels.push(ch.itemName);
           this.pieChartData.push(ch.totalPrice);
+          console.log(idx);
           backgrounds.push(
             `rgba(${0 + idx * 10}, ${255 - idx * 20}, ${0 + idx * 10}, 0.3)`
           );
