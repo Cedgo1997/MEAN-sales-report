@@ -9,7 +9,7 @@
     >
   </div>
   <div class="top-charts">
-    <div class="chart">
+    <div *ngIf="!isLoadingResults" class="chart">
       <canvas
         baseChart
         [data]="pieChartData"
