@@ -9,24 +9,16 @@ import { SalesComponent } from './components/sales/sales.component';
 import { SalesDetailsComponent } from './components/sales-details/sales-details.component';
 import { AddSalesComponent } from './components/add-sales/add-sales.component';
 import { EditSalesComponent } from './components/edit-sales/edit-sales.component';
+import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 
 // Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Angular Material
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 // Ng2-charts
 import { ChartsModule } from 'ng2-charts';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +27,7 @@ import { ChartsModule } from 'ng2-charts';
     SalesDetailsComponent,
     AddSalesComponent,
     EditSalesComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,16 +36,8 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
     ChartsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

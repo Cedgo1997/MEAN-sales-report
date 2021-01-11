@@ -2,27 +2,7 @@
   <h2>Sales List</h2>
   <div class="example-loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
-  <div class="button-row">
-    <a mat-flat-button color="primary" [routerLink]="['/add-sales']"
-      ><mat-icon>add</mat-icon> Sales</a
-    >
-  </div>
-  <div class="top-charts">
-    <div *ngIf="!isLoadingResults" class="chart">
-      <canvas
-        baseChart
-        [data]="pieChartData"
-        [labels]="pieChartLabels"
-        [chartType]="pieChartType"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins"
-        [colors]="pieChartColors"
-        [legend]="pieChartLegend"
-      >
-      </canvas>
-    </div>
-  </div>
+  </div>  
   <div class="mat-elevation-z8">
     <table
       mat-table
@@ -55,5 +35,20 @@
         [routerLink]="['/sales-details/', row._id]"
       ></tr>
     </table>
+  </div>
+  <div class="top-charts">
+    <div *ngIf="!isLoadingResults" class="chart">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend"
+      >
+      </canvas>
+    </div>
   </div>
 </div>
