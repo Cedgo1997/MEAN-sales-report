@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { environment } from 'src/environments/environment';
 
 // Components
 import { SalesComponent } from './components/sales/sales.component';
@@ -19,6 +20,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Ng2-charts
 import { ChartsModule } from 'ng2-charts';
 import { MaterialModule } from './material.module';
+
+// NGRX
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -38,6 +44,12 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     ChartsModule,
     MaterialModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
