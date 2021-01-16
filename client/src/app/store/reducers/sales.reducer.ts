@@ -16,7 +16,7 @@ export const initialState: SalesState = {
   sales: [],
 };
 
-const _counterReducer = createReducer(
+const _salesReducer = createReducer(
   initialState,
 
   on(salesActions.loadSales, (state) => ({ ...state, loading: true })),
@@ -34,6 +34,6 @@ const _counterReducer = createReducer(
   }))
 );
 
-export function counterReducer(state, action) {
-  return _counterReducer(state, action);
+export function salesReducer(state, action) {
+  return _salesReducer(state, action);
 }
