@@ -25,6 +25,8 @@ import { MaterialModule } from './material.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { SalesEffects } from './store/effects/sales.effects';
+import { appReducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -44,8 +46,8 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserAnimationsModule,
     ChartsModule,
     MaterialModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([SalesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
