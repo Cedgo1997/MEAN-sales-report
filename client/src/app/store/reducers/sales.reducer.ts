@@ -6,14 +6,14 @@ import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 
 export const salesAdapter: EntityAdapter<Sales> = createEntityAdapter<Sales>();
 
-export interface SalesState extends EntityState<Sales> {
+export interface salesState extends EntityState<Sales> {
   loading: boolean;
   loaded: boolean;
   error: any;
   sales: Sales[];
 }
 
-export const initialState: SalesState = {
+export const initialState: salesState = {
   ids: [],
   entities: {},
   loading: false,
