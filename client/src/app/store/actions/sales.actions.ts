@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Sales } from 'src/app/models/sales.model';
 
+// LOAD
 export const loadSales = createAction('[Sales Component] Load Sales');
 export const loadSalesSuccess = createAction(
   '[Sales Component] Load Sales Success',
