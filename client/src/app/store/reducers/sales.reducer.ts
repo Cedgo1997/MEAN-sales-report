@@ -26,7 +26,7 @@ const _counterReducer = createReducer(
     loaded: true,
     sales,
   })),
-  on(salesActions.loadSalesSuccess, (state, { payload }) => ({
+  on(salesActions.loadSalesFail, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,
