@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { SalesApiService } from './../../services/sales-api.service';
 import * as fromSalesActions from './../actions/sales.actions';
@@ -12,10 +12,14 @@ export class SalesEffects {
       ofType(fromSalesActions.loadSales),
       mergeMap(() =>
         this.salesApiService.getSales().pipe(
-          map((sales) => fromSalesActions.loadSalesSuccess({ sales })),
-          catchError((err) =>
-            of(fromSalesActions.loadSalesFail({ payload: err }))
-          )
+          map((sales) => {
+            console.log(sales);
+            return fromSalesActions.loadSalesSuccess({ sales });
+          }),
+          catchError((err) => {
+            console.log(err);
+            return of(fromSalesActions.loadSalesFail({ payload: err }));
+          })
         )
       )
     )

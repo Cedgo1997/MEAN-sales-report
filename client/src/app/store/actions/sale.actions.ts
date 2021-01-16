@@ -35,7 +35,7 @@ export const createSaleFail = createAction(
 
 export const updateSale = createAction(
   '[Edit Sales Component] Update Sale',
-  props<{ sale: Sales }>()
+  props<{ id: string; sale: Sales }>()
 );
 export const updateSaleSuccess = createAction(
   '[Edit Sales Component] Update Sale Success',

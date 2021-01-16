@@ -8,6 +8,9 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Sales } from 'src/app/models/sales.model';
 import { Chart } from 'src/app/models/chart.model';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
+import { loadSales } from 'src/app/store/actions/sales.actions';
 
 @Component({
   selector: 'app-sales',
@@ -46,7 +49,7 @@ export class SalesComponent implements OnInit, OnDestroy {
   isLoadingResults = true;
   salesSubs: Subscription;
 
-  constructor(private api: SalesApiService) {
+  constructor(private store: Store<AppState>) {
     this.getSales();
 
     this.socket.on(
@@ -59,64 +62,10 @@ export class SalesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    this.salesSubs.unsubscribe();
-  }
-
-  // Getting data from API
+  ngOnDestroy(): void {}
 
   getSales() {
-    this.salesSubs = this.api.getSales().subscribe(
-      (res: any) => {
-        this.data = res;
-        console.log(this.data);
-        this.pieChartLabels = [];
-        this.pieChartData = [];
-        this.pieChartColors = [];
-        this.data.forEach((ch, idx) => {
-          this.pieChartLabels.push(ch.itemName);
-          this.pieChartData.push(ch.totalPrice);
-          console.log(idx);
-          setTimeout(() => {
-            this.pieChartColors[0].backgroundColor.push(
-              `rgba(${0 + idx * 10}, ${255 - idx * 20}, ${0 + idx * 10}, 0.3)`
-            );
-          });
-        });
-        this.isLoadingResults = false;
-      },
-      (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    this.store.dispatch(loadSales());
+    this.isLoadingResults = false;
   }
-
-  /* getChartData() {
-    this.api.getChart().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.chartData = res;
-        this.pieChartLabels = [];
-        this.pieChartData = [];
-        this.pieChartColors = [];
-        const backgrounds = [];
-        this.chartData.forEach((ch, idx) => {
-          this.pieChartLabels.push(ch._id.itemName);
-          this.pieChartData.push(ch.totalPrice);
-          backgrounds.push(
-            `rgba(${0 + idx * 10}, ${255 - idx * 20}, ${0 + idx * 10}, 0.3)`
-          );
-        });
-        this.pieChartColors = [
-          {
-            backgroundColor: backgrounds,
-          },
-        ];
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  } */
 }
