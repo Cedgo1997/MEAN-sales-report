@@ -4,22 +4,24 @@ import * as salesActions from './../actions/sales.actions';
 // ENTITIES
 import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 
-export const salesAdapter: EntityAdapter<Sales> = createEntityAdapter<Sales>();
+export const salesAdapter: EntityAdapter<Sales> = createEntityAdapter<Sales>({
+  selectId: (sales: Sales) => sales._id,
+});
 
 export interface salesState extends EntityState<Sales> {
   loading: boolean;
   loaded: boolean;
-  error: any;
   sales: Sales[];
+  error: any;
 }
 
 export const initialState: salesState = {
   ids: [],
   entities: {},
+  sales: [],
   loading: false,
   loaded: false,
   error: null,
-  sales: [],
 };
 
 const _salesReducer = createReducer(
@@ -29,6 +31,7 @@ const _salesReducer = createReducer(
   on(salesActions.loadSalesSuccess, (state, { sales }) =>
     salesAdapter.setAll(sales, {
       ...state,
+      sales,
       loading: false,
       loaded: true,
     })
