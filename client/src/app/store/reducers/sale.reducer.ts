@@ -3,33 +3,25 @@ import { Sales } from 'src/app/models/sales.model';
 import * as saleActions from './../actions/sale.actions';
 
 // ENTITIES
-import {
-  EntityState,
-  EntityAdapter,
-  createEntityAdapter,
-  Update,
-} from '@ngrx/entity';
-
-export interface User {
-  id: string;
-  name: string;
-}
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 export interface saleState extends EntityState<Sales> {
   // additional entity state properties
-  selectedUserId: number | null;
+  selectedSaleId: number | null;
   loading: boolean;
   loaded: boolean;
   error: any;
   sale: Sales;
 }
 
-export const saleAdapter: EntityAdapter<Sales> = createEntityAdapter<Sales>();
+export const saleAdapter: EntityAdapter<Sales> = createEntityAdapter<Sales>({
+  selectId: (sale: Sales) => sale._id,
+});
 
 export const initialState: saleState = saleAdapter.getInitialState({
   ids: [],
   entities: {},
-  selectedUserId: null,
+  selectedSaleId: null,
   loading: false,
   loaded: false,
   error: null,
@@ -38,9 +30,12 @@ export const initialState: saleState = saleAdapter.getInitialState({
 
 const _saleReducer = createReducer(
   initialState,
-
   // LOAD
-  /* on(saleActions.loadSale, (state) => ({ ...state, loading: true })), */
+  on(saleActions.loadSale, (state, { id }) => ({
+    selectedSaleId: id,
+    ...state,
+    loading: true,
+  })),
   on(saleActions.loadSaleSuccess, (state, { sale }) =>
     saleAdapter.setOne(sale, {
       ...state,

@@ -11,6 +11,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { AppState } from 'src/app/app.reducer';
+import { Store } from '@ngrx/store';
+import { createSale } from 'src/app/store/actions/sale.actions';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -47,7 +50,8 @@ export class AddSalesComponent implements OnInit {
   constructor(
     private router: Router,
     private api: SalesApiService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -61,8 +65,9 @@ export class AddSalesComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.isLoadingResults = true;
-    this.api.addSales(this.salesForm.value).subscribe(
+    /* this.isLoadingResults = true; */
+    this.store.dispatch(createSale({ sale: this.salesForm.value }));
+    /* this.api.addSales(this.salesForm.value).subscribe(
       (res: any) => {
         const id = res._id;
         this.isLoadingResults = false;
@@ -73,6 +78,6 @@ export class AddSalesComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       }
-    );
+    ); */
   }
 }
