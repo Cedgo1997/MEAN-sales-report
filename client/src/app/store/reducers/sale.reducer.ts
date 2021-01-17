@@ -19,8 +19,6 @@ export const saleAdapter: EntityAdapter<Sales> = createEntityAdapter<Sales>({
 });
 
 export const initialState: saleState = saleAdapter.getInitialState({
-  ids: [],
-  entities: {},
   selectedSaleId: null,
   loading: false,
   loaded: false,
@@ -46,58 +44,6 @@ const _saleReducer = createReducer(
   on(saleActions.loadSaleFail, (state, { payload }) => ({
     ...state,
     entities: {},
-    loading: false,
-    loaded: false,
-    error: payload,
-  })),
-
-  // CREATE
-  on(saleActions.createSale, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-  })),
-  on(saleActions.createSaleSuccess, (state, { sale }) =>
-    saleAdapter.addOne(sale, {
-      ...state,
-      loading: false,
-      loaded: true,
-    })
-  ),
-  on(saleActions.createSaleFail, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: payload,
-  })),
-
-  // UPDATE
-  on(saleActions.updateSale, (state) => ({ ...state, loading: true })),
-  on(saleActions.updateSaleSuccess, (state, { sale }) =>
-    saleAdapter.updateOne(sale, {
-      ...state,
-      loading: false,
-      loaded: true,
-    })
-  ),
-  on(saleActions.updateSaleFail, (state, { payload }) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-    error: payload,
-  })),
-
-  // DELETE
-  on(saleActions.deleteSale, (state) => ({ ...state, loading: true })),
-  on(saleActions.deleteSaleSuccess, (state, { id }) =>
-    saleAdapter.removeOne(id, {
-      ...state,
-      loading: false,
-      loaded: true,
-    })
-  ),
-  on(saleActions.deleteSaleFail, (state, { payload }) => ({
-    ...state,
     loading: false,
     loaded: false,
     error: payload,

@@ -13,7 +13,7 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AppState } from 'src/app/app.reducer';
 import { Store } from '@ngrx/store';
-import { createSale } from 'src/app/store/actions/sale.actions';
+import { createSale } from 'src/app/store/actions/sales.actions';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {

@@ -20,57 +20,6 @@ export class SaleEffects {
       )
     )
   );
-  createSale$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromSaleActions.createSale),
-      mergeMap((action) =>
-        this.salesApiService.addSales(action.sale).pipe(
-          map((sale) => {
-            console.log(sale);
-            return fromSaleActions.loadSaleSuccess({ sale });
-          }),
-          catchError((err) => {
-            console.log(err);
-            return of(fromSaleActions.loadSaleFail({ payload: err }));
-          })
-        )
-      )
-    )
-  );
-  updateSale$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromSaleActions.updateSale),
-      mergeMap((action) =>
-        this.salesApiService.editSales(action.id, action.sale).pipe(
-          map((sale) => {
-            console.log(sale);
-            return fromSaleActions.updateSaleSuccess({ sale });
-          }),
-          catchError((err) => {
-            console.log(err);
-            return of(fromSaleActions.updateSaleFail({ payload: err }));
-          })
-        )
-      )
-    )
-  );
-  deleteSale$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromSaleActions.deleteSale),
-      mergeMap((action) =>
-        this.salesApiService.deleteSales(action.id).pipe(
-          map(() => {
-            console.log(action.id);
-            return fromSaleActions.deleteSaleSuccess({ id: action.id });
-          }),
-          catchError((err) => {
-            console.log(err);
-            return of(fromSaleActions.loadSaleFail({ payload: err }));
-          })
-        )
-      )
-    )
-  );
 
   constructor(
     private actions$: Actions,
