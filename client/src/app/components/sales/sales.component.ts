@@ -45,9 +45,9 @@ export class SalesComponent implements OnInit, OnDestroy {
   public pieChartColors = [{ backgroundColor: [] }];
 
   displayedColumns: string[] = ['itemId', 'itemName', 'totalPrice'];
-  data: Sales[] = [];
   isLoadingResults = true;
   salesSubs: Subscription;
+  data: Sales[] = [];
 
   constructor(private store: Store<AppState>) {
     this.getSales();
@@ -60,12 +60,16 @@ export class SalesComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.select('sales').subscribe(({ sales }) => {
+      this.data = sales;
+      this.isLoadingResults = false;
+    });
+  }
 
   ngOnDestroy(): void {}
 
   getSales() {
     this.store.dispatch(loadSales());
-    this.isLoadingResults = false;
   }
 }
