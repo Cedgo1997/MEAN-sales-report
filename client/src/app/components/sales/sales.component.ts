@@ -61,13 +61,56 @@ export class SalesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.select('sales').subscribe(({ sales }) => {
+    this.salesSubs = this.store.select('sales').subscribe(({ sales }) => {
       this.data = sales;
+      const backgrounds = [];
+      this.data.forEach((sale, idx) => {
+        this.pieChartLabels.push(sale.itemName);
+        this.pieChartData.push(sale.totalPrice);
+        backgrounds.push(
+          `rgba(${0 + sale.itemQty * 15}, ${155 - sale.itemQty * 5}, ${0 + sale.itemQty * 30}, 0.3)`
+        );
+        this.pieChartColors = [
+          {
+            backgroundColor: backgrounds,
+          },
+        ];
+      });
       this.isLoadingResults = false;
     });
   }
 
-  ngOnDestroy(): void {}
+  /* getChartData() {
+    this.api.getChart().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.chartData = res;
+        this.pieChartLabels = [];
+        this.pieChartData = [];
+        this.pieChartColors = [];
+        const backgrounds = [];
+        this.chartData.forEach((ch, idx) => {
+          this.pieChartLabels.push(ch._id.itemName);
+          this.pieChartData.push(ch.totalPrice);
+          backgrounds.push(
+            `rgba(${0 + idx * 10}, ${255 - idx * 20}, ${0 + idx * 10}, 0.3)`
+          );
+        });
+        this.pieChartColors = [
+          {
+            backgroundColor: backgrounds,
+          },
+        ];
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  } */
+
+  ngOnDestroy(): void {
+    this.salesSubs.unsubscribe();
+  }
 
   getSales() {
     this.store.dispatch(loadSales());
